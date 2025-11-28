@@ -14,29 +14,43 @@ export default function Tests(){
 
   return (
     <div>
-      <h1>Tes Saya</h1>
+      <h1 className="page-title">Tes Saya</h1>
       <div className="card">
         <table className="table">
-          <thead><tr><th>Jenis Tes</th><th>Deskripsi</th><th>Aksi</th></tr></thead>
+          <thead>
+            <tr>
+              <th>Jenis Tes</th>
+              <th>Deskripsi</th>
+              <th style={{ width: 260 }}>Aksi</th> {/* beri fixed width supaya tidak melar */}
+            </tr>
+          </thead>
+
           <tbody>
-            {tests.map(t=>(
-              <tr key={t.id}>
-                <td>{t.title}</td>
-                <td>{t.description}</td>
-                <td>
-                  <Link to={`/tests/${t.id}`} className="btn">Detail</Link>
-                  <Link
-                    to={hasResult(t.id) ? `/result/${t.id}` : `/play/${t.id}`}
-                    className={`btn ${hasResult(t.id) ? '' : 'btn-primary'}`}
-                    aria-disabled={hasResult(t.id)}
-                    onClick={(e) => { if(hasResult(t.id)) e.preventDefault(); }}
-                    style={ hasResult(t.id) ? { opacity: 0.6, pointerEvents: 'none' } : {} }
-                  >
-                    {hasResult(t.id) ? 'Sudah Selesai' : 'Kerjakan'}
-                  </Link>
-                </td>
-              </tr>
-            ))}
+            {tests.map(t=> {
+              const done = hasResult(t.id);
+              return (
+                <tr key={t.id}>
+                  <td>{t.title}</td>
+                  <td>{t.description}</td>
+                  <td>
+                    <div className="test-actions">
+                      <Link to={`/tests/${t.id}`} className="btn">
+                        Detail
+                      </Link>
+
+                      <Link
+                        to={done ? `/result/${t.id}` : `/play/${t.id}`}
+                        className={`btn btn-primary ${done ? 'disabled' : ''}`}
+                        aria-disabled={done ? "true" : "false"}
+                        onClick={(e) => { if(done) e.preventDefault(); }}
+                      >
+                        {done ? 'Sudah Selesai' : 'Kerjakan'}
+                      </Link>
+                    </div>
+                  </td>
+                </tr>
+              );
+            })}
           </tbody>
         </table>
       </div>

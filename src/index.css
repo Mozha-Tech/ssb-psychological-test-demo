@@ -313,3 +313,44 @@ body {
   .login-title { font-size: 20px; }
   .logo-big { width: 64px; }
 }
+
+
+/* ==== Buttons in Test List (Detail + Kerjakan) ==== */
+.test-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.test-actions .btn,
+.test-actions .btn-primary {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+/* Responsif khusus mobile */
+@media (max-width: 480px) {
+  .test-actions {
+    flex-direction: column;
+  }
+
+  .test-actions .btn,
+  .test-actions .btn-primary {
+    width: 100%;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.actions .btn,
+.actions .btn-primary {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  font-size: 15px;
+}
